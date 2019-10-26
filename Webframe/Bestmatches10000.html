@@ -13,73 +13,118 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<script>
+	
+		document.addEventListener("DOMContentLoaded", function() {
+														sendData();
+												});
+
+		async function handleJSON(data) {
+			var values = await data.json();
+			
+			document.getElementById("schulname").innerHTML = values["name"];
+			document.getElementById("Stadt").innerHTML = values["stadt"];
+			document.getElementById("Bundesland").innerHTML = values["Bundesland"];
+			//document.getElementById("phone").innerHTML = values["Bundesland"];
+			var einsatzbereichListe = values["Einsatzbereich"];
+			var einsatzbereiche = ""
+			for(var i = 0; i < einsatzbereichListe.length; i = i + 1) {
+				einsatzbereiche = einsatzbereiche + einsatzbereichListe[i] + "<br>";
+			}
+			document.getElementById("einsatzbereiche").innerHTML = einsatzbereiche;
+			
+		}
+
+		function sendData() {
+			var xmlHttp = new XMLHttpRequest();
+			var query = window.location.search.substring(1).split("=")[1];
+			var data = {"id" : query};
+			fetch('http://127.0.0.1:8080/school/', {
+				method: 'POST', // *GET, POST, PUT, DELETE, etc.
+				mode: 'cors', // no-cors, *cors, same-origin
+				cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+				headers: {
+				  'Content-Type': 'application/json'
+				  // 'Content-Type': 'application/x-www-form-urlencoded',
+				},
+				redirect: 'follow', // manual, *follow, error
+				referrer: 'no-referrer', // no-referrer, *client
+				body: JSON.stringify(data) // body data type must match "Content-Type" header
+			  })
+		.then(response => {
+			document.getElementById("schwerpunktButton").setAttribute("onclick", "window.location.replace(\"./Matches_per_Schule.html?id=" + query + "\");");
+			document.getElementById("distanzButton").setAttribute("onclick", "window.location.replace(\"./Matches_per_Schule.html?id=" + query + "\");");
+			document.getElementById("visionButton").setAttribute("onclick", "window.location.replace(\"./Matches_per_Schule.html?id=" + query + "\");");
+			handleJSON(response);
+		})
+		.then(json => 
+			console.log(json))
+		}
+	
+	</script>
 </head>
 <body>
 <!-- Main Container -->
 <div class="container"> 
   <!-- Navigation -->
-  <header> <a href="">
+  <header > 
+  <a href="">
 	  <h4 class="logo">BEST MATCHES</h4>
 	  </a>
-    <nav>
-      <ul>
-        <li><a href="#hero">HOME</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li> <a href="#contact">CONTACT</a></li>
-      </ul>
-    </nav>
   </header>
   <!-- Hero Section -->
- <table>
-        <tr>
-            <td>
-                <table>
-                    <tr>
-                        <td>
-                            <img src="Distanz.png" alt=""width="150" height="90"  style="image fit">
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td>
-                            <img src="Vision.png" alt=""width="150" height="90"  style="image fit"> 
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td>
-                            <img src="Header-Bild_Farbsymbole.jpg" alt=""width="150" height="90"  style="image fit">
-                        </td>
-                    </tr>
-                </table>
-
-        <td>
-                <table>
-                    <tr>
-                        <td>
-                            <button class="button" style="vertical-align:left"><span> Distanz</span></button>
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td>
-                            <button class="button" style="vertical-align:left"><span> Vision</span></button>
-                        </td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td>
-                            <button class="button" style="vertical-align:left"><span> Schwerpunkt</span></button>
-                        </td>
-                    </tr>
-                </table>
-        </td>
-        <td>
-                <table>
+  <body>
+  <div align="center">
+  <table width="1024" height="489.6" style="border-spacing: 2px;">
+	<tr>
+		<td>				
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<img src="Distanz.png" alt=""width="150" height="90"  style="image fit">
+								</td>
+								<td>
+									<button id="distanzButton"class="button" style="vertical-align:left"><span> Distanz</span></button>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<img src="Header-Bild_Farbsymbole.jpg" alt=""width="150" height="90"  style="image fit">
+								</td>
+								<td>
+									<button id="schwerpunktButton" class="button" style="vertical-align:left" ><span> Schwerpunkt</span></button>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<img src="Vision.png" alt=""width="150" height="90"  style="image fit"> 
+								</td>
+								<td>
+									<button id = "visionButton"class="button" style="vertical-align:left"><span> Vision</span></button>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table>
                     <tr>
                         <td>
                             	<tr><td><table><td>&nbsp;</td></table></td><td>			<div class="media">
@@ -90,18 +135,23 @@
 			  </div>
 				
 			  <address>
-              <strong>Schule an der R.</strong><br>
-              Jestetten<br>
-              Baden-Württemberg<br>
-              <abbr title="Phone">Telefon:</abbr> (123) 456-7890<br>
+              <strong><div id="schulname"></div></strong><br>
+              <div id="Stadt"></div><br>
+              <div id="Bundesland"></div><br>
+              <abbr title="Phone">Telefon:</abbr> <div id="phone"></div><br>
             </address>
           </div></td></tr>
                         </td>
                     </tr>
+					<tr>
+						<td>
+							<div>Einsatzbereiche:</div> 
+							<div id="einsatzbereiche"></div>
+						</td>
+					</tr>
                 </table>
-        </td>
-
-            </td>
-        </tr>
-    </table>
- 
+		</td>
+	</tr>
+  </table>
+  </div>
+  </body>

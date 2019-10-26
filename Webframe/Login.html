@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+	<title>Login</title>
+	
+
+	
 	<script>
 		function logIn() {
-					
+							
 				document.getElementById("Password").setAttribute("style", "border-color: red");
 				tries = 1;	
 				
@@ -15,13 +18,15 @@
 			
 				document.getElementById("Button").setAttribute("onClick", "window.location='Schulauswahl.html'");
 			
-			
+					
 		}
 	</script>
 	
+	
+	
 	<style type="text/css">
 		.containerLogin{
-			width:300px;
+			width:400px;
 			heght:200px;
 			background: #f0f0f0;
 			border: 3px solid #00000;
@@ -30,11 +35,11 @@
 		}
 	</style>
 	
-	<!--<link rel="stylesheet" href="singlePageTemplate.css"/>-->
+	<link rel="stylesheet" href="bootstrap-4.3.1.css"/>
 	
 </head>
-<body>
-	<div class="containerLogin">		
+<body background="Background.jpg">
+	<div class="containerLogin">
 			<table id="Login">
 				<colgroup>
 					<col width: 100px;>
@@ -51,9 +56,19 @@
 					</tr>
 
 			</table>  
-			 <br>  
-			<button>Zurücksetzen</button>
+			<br>  
+			<button id="Button_Reset" onclick="history.go(0)">Zurücksetzen</button>
 			<button id="Button" onclick="logIn()">Einloggen</button>
+	
+		<script>
+		var input= document.getElementById("Password");
+		input.addEventListener("keyup", function(event){
+			if (event.keyCode === 13){
+				event.preventDefault();
+				document.getElementById("Button").click();
+			}
+		})
+	</script>
 	</div>
 </body>
 </html>

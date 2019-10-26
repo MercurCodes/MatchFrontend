@@ -18,19 +18,19 @@ function goBack() {
 	
 </script>
     <div class="container">
- 
-      <div class="row">
-        <div class="col-6 col-xl-8">
+<div class="row">
+<div class="col-6 col-xl-12">
 			<div id="main">
-				<br>
-          <h1><button onclick="goBack()">◄</button>Best Matches für Schule XY</h1>
+			<br>
+			<h1>Best Matches für Schule XY<a href="./Bestmatches10000.html" class="btn_zurueck">Zurück</a> <a href="#" class="btn_senden">Reservieren</a></h1>
 				</div>
         </div>
 </div>
       <hr>
       <div class="row">
         <div class="col-md-8 col-sm-12 col-xl-6">
-		<div class="jobs">
+		<div onclick="location.href='#';" style="cursor: pointer;">
+			<div class="jobs">
 			<div class="item">
           <div class="media">
             <img src="michelle.jpg" alt="Generic placeholder image" class="mr-3">
@@ -52,13 +52,15 @@ function goBack() {
         </div>
 		</div>
 		  </div>
+		  </div>
 		
-        <div class="col-md-4 col-sm-12 col-xl-5 offset-xl-0">
-			<div class="media">
+        <div class="col-md-4 col-sm-12 offset-xl-0 col-xl-6">
+			<div class="media col-8 col-xl-12">
 			<img src="school.png" alt="Generic placeholder image" class="mr-3">
-				<div class="media-body">
+			
+			  <div class="media-body">
 				<div class="row justify-content-md-around m-1">
-				  </div>
+			    </div>
 			  </div>
 				
 			  <address>
@@ -68,12 +70,15 @@ function goBack() {
               <abbr title="Phone">Telefon:</abbr> (123) 456-7890<br>
             </address>
           </div>
+			<div class="col-8 col-xl-12">
+			<strong>Bemerkungen:</strong><br><p> Diese Schule hat eine komplizierte Lehrerschaft. Neuen Projekten stehen die Lehrer oft sehr kritisch gegenüber. Ein hohes Mass an Einfühlvermögen ist unverzichtbar. </p>
+			</div>
         </div>
-      </div>
+</div>
 <div class="row">
 	
 	        <div class="col-md-8 col-sm-12 col-xl-6">
-				<div class="jobs">
+			  <div class="jobs">
 			<div class="item">
           <div class="media">
             <img src="lukas.jpg" alt="Generic placeholder image" class="mr-3">
@@ -129,7 +134,7 @@ function goBack() {
 		<h2>Spidermap Fits</h2>
 		<hr>
 		<div class="row"> </div>
-		<img src="chart_radar.svg" alt="SVG mit img Tag laden" width="100%" height="auto" >
+	  <img src="chart_radar.svg" alt="SVG mit img Tag laden" width="100%" height="auto" >
 		
 </div>
     <div class="col-md-6 col-sm-12">
@@ -137,9 +142,8 @@ function goBack() {
 		  
 	  <div class="row"> </div>
 </div>
-	<div class="row"> </div>
-    <div class="col-md-6 col-sm-12 offset-xl-4 col-xl-2">
-	<a href="#" class="btn_senden">Senden</a>&nbsp;</div>
+	
+    
 <style>
 .btn_senden {
 	background-color:#44c767;
@@ -151,12 +155,39 @@ function goBack() {
 	font-size:21px;
 	padding:10px 32px;
 	text-decoration:none;
+	margin-left: 10px;
+	vertical-align: middle;
+	margin-top: -10px
 
 }
 .btn_senden:hover {
 	background-color:#5cbf2a;
 }
 .btn_senden:active {
+	position:relative;
+	top:1px;
+}
+	
+.btn_zurueck {
+	background-color:#130FE5;
+	border-radius:15px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:21px;
+	padding:10px 32px;
+	text-decoration:none;
+	margin-left: 290px;
+	vertical-align: middle;
+	margin-top: -10px
+	
+
+}
+.btn_zurueck:hover {
+	background-color:#3F8CD4;
+}
+.btn_zurueck:active {
 	position:relative;
 	top:1px;
 }
