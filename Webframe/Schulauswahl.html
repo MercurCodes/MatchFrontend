@@ -1,0 +1,181 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="singlePageTemplate.css" />
+	<title>Auswahl</title>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+														sendData();
+												});
+
+		async function handleJSON(data) {
+			var values = await data.json();
+			var lengthOfSchools = values["schools"].length;
+			var table = document.getElementById("Schulen");
+			for(var i = 0; i < lengthOfSchools; i = i + 1) {
+				var row = table.insertRow();
+				var schoolObject = values["schools"][i];
+				var schoolId = schoolObject["id"]
+
+				var nameCell = row.insertCell(0);
+				nameCell.innerHTML = "<a href=\"./BestMatches10000.html?id=" + schoolId + "\">" + schoolObject["login"] + "</a>";
+				var stadtCell = row.insertCell(1);
+				stadtCell.innerHTML = schoolObject["stadt"]
+				var bundeslandCell = row.insertCell(2);
+				bundeslandCell.innerHTML = schoolObject["bundesland"]
+				var priorityCell = row.insertCell(3);
+				priorityCell.innerHTML = schoolObject["priority"]
+			}
+		}
+
+		function sendData() {
+			var xmlHttp = new XMLHttpRequest();
+			fetch('http://127.0.0.1:8080/schoolList/')
+		.then(data => {
+			handleJSON(data);
+		})
+		.then(json => 
+			console.log(json))
+		}
+
+	</script>
+	</head>
+	<body class="is-preload">
+<!-- Header -->
+			<div id="header" >
+				<h1>Schulen</h1>
+			</div>
+					<h2>
+							<table id="Schulen">
+									<colgroup>
+										<col width="6*">
+										<col width="2*">
+										<col width="3*">
+										<col width="2*">
+									</colgroup>
+									
+											<tr class="header">
+													<th><button onclick="sortTable(0)">Name </button></th>
+													<th><button onclick="sortTable(1)">Ort</button></th>
+													<th><button onclick="sortTable(2)">Bundesland</button></th>
+													<th><button onclick="sortTable(3)">Priorität</button></th>
+											</tr>
+											<tr>
+										
+													<!--When a header is clicked, run the sortTable function, with a parameter,
+													0 for sorting by names, 1 for sorting by Ort, 2 sorting by Bundesland, 3 sorting by Priorität : -->
+													<td>
+														<input type="text" id="myInput0" onkeyup="myFunction()" placeholder="Suchen..." title="Suchen"/>
+													</td>
+													
+													<td>
+															<input type="text" id="myInput1" onkeyup="myFunction()" placeholder="Suchen..." title="Suchen"/>
+														</td>
+														
+													<td>
+															<input type="text" id="myInput2" onkeyup="myFunction()" placeholder="Suchen..." title="Suchen"/>
+														</td>
+														
+													<td>
+															<input type="text" id="myInput3" onkeyup="myFunction()" placeholder="Suchen..." title="Suchen"/>
+														</td>
+											</tr>
+										  </table>
+										  
+										  <script>
+
+										function myFunction() {
+										var input, filter, table, tr, td, i, txtValue;
+										input0 = document.getElementById("myInput0");
+										input1 = document.getElementById("myInput1");
+										input2 = document.getElementById("myInput2");
+										input3 = document.getElementById("myInput3");
+										filter0 = input0.value.toUpperCase();
+										filter1 = input1.value.toUpperCase();
+										filter2 = input2.value.toUpperCase();
+										filter3 = input3.value.toUpperCase();
+										table = document.getElementById("Schulen");
+										tr = table.getElementsByTagName("tr");
+										for (i = 2; i < tr.length; i++) {
+										  td0 = tr[i].getElementsByTagName("td")[0];
+										  td1 = tr[i].getElementsByTagName("td")[1];
+										  td2 = tr[i].getElementsByTagName("td")[2];
+										  td3 = tr[i].getElementsByTagName("td")[3];
+										  if (td0) {
+											txtValue0 = td0.textContent || td0.innerText;
+											txtValue1 = td1.textContent || td1.innerText;
+											txtValue2 = td2.textContent || td2.innerText;
+											txtValue3 = td3.textContent || td3.innerText;
+											if ((txtValue0.toUpperCase().indexOf(filter0) > -1)&& (txtValue1.toUpperCase().indexOf(filter1) > -1)&& (txtValue2.toUpperCase().indexOf(filter2) > -1)&& (txtValue3.toUpperCase().indexOf(filter3) > -1)) {
+											  tr[i].style.display = "";
+											} else {
+											  tr[i].style.display = "none";
+											}
+								
+										  }
+										  }
+										  }
+
+										  function sortTable(n) {
+											var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+											table = document.getElementById("Schulen");
+											switching = true;
+											// Set the sorting direction to ascending:
+											dir = "asc";
+											/* Make a loop that will continue until
+											no switching has been done: */
+											while (switching) {
+											  // Start by saying: no switching is done:
+											  switching = false;
+											  rows = table.rows;
+											  /* Loop through all table rows (except the
+											  first, which contains table headers): */
+											  for (i = 2; i < (rows.length - 1); i++) {
+												// Start by saying there should be no switching:
+												shouldSwitch = false;
+												/* Get the two elements you want to compare,
+												one from current row and one from the next: */
+												x = rows[i].getElementsByTagName("TD")[n];
+												y = rows[i + 1].getElementsByTagName("TD")[n];
+												/* Check if the two rows should switch place,
+												based on the direction, asc or desc: */
+												if (dir == "asc") {
+												  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+													// If so, mark as a switch and break the loop:
+													shouldSwitch = true;
+													break;
+												  }
+												} else if (dir == "desc") {
+												  if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+													// If so, mark as a switch and break the loop:
+													shouldSwitch = true;
+													break;
+												  }
+												}
+											  }
+											  if (shouldSwitch) {
+												/* If a switch has been marked, make the switch
+												and mark that a switch has been done: */
+												rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+												switching = true;
+												// Each time a switch is done, increase this count by 1:
+												switchcount ++;
+											  } else {
+												/* If no switching has been done AND the direction is "asc",
+												set the direction to "desc" and run the while loop again. */
+												if (switchcount == 0 && dir == "asc") {
+												  dir = "desc";
+												  switching = true;
+												}
+											  }
+											}
+										  }
+										 
+										  </script>
+								</h2>
+</body>
+</html>

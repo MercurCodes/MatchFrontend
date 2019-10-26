@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Test_Tooltip</title>
+	<style type="text/css">
+		.container{
+			width: 400px;
+			height: 300px;
+			background: #F0F0F0;
+			border: 1px solid #000000;
+			margin: 10% auto;
+			padding:20px;
+		}
+		
+		a{margin-right:10px;}
+		
+		/* start the tooltip css*/
+		.tooltip {position:relative; z-index:20;}
+		.tooltip span {display:none;}
+		.tooltip:hover {z-index:21;}
+		.tooltip:hover span {
+			display:block;
+			width:150px;
+			text-align:center;
+			padding:5px;
+			color:#fff;
+			background:#535663;
+			font-size:11px;
+			text-decoration:none;
+			position:absolute;
+			border-radius:6px;
+			top:20px;
+			left:5px;
+		}
+	
+	</style>
+</head>
+
+		<div class="container">
+			<a href="#" class="tooltip	"> This is the Link 
+				<span>This is the tooltip</span></a>
+			<a href="#" class="tooltip	"> This is another Link 
+				<span>This is another tooltip</span></a>
+			<a href="#" class="tooltip	"> This is the last Link 
+				<span>This is the last tooltip</span></a>
+		</div>
+<body>
+</body>
+</html>

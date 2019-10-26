@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+	<script>
+		function logIn() {
+					
+				document.getElementById("Password").setAttribute("style", "border-color: red");
+				tries = 1;	
+				
+				document.getElementById("Password").value = ""			
+			
+				document.getElementById("Button").setAttribute("onClick", "window.location='Schulauswahl.html'");
+			
+			
+		}
+	</script>
+	
+	<style type="text/css">
+		.containerLogin{
+			width:300px;
+			heght:200px;
+			background: #f0f0f0;
+			border: 3px solid #00000;
+			margin: 10% auto;
+			padding: 20px;
+		}
+	</style>
+	
+	<!--<link rel="stylesheet" href="singlePageTemplate.css"/>-->
+	
+</head>
+<body>
+	<div class="containerLogin">		
+			<table id="Login">
+				<colgroup>
+					<col width: 100px;>
+					<col witdh: 100px;>
+				</colgroup>
+					<tr>
+						<td><label>Benutzername</label></td>
+						<td><input type="text" id="User" autofocus/></td>
+					</tr>
+
+					<tr>
+						<td><label>Passwort</label></td>
+						<td><input type= "password" id="Password"></td>
+					</tr>
+
+			</table>  
+			 <br>  
+			<button>Zurücksetzen</button>
+			<button id="Button" onclick="logIn()">Einloggen</button>
+	</div>
+</body>
+</html>
